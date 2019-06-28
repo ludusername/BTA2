@@ -1,0 +1,137 @@
+﻿@model BTA.Models.TransportaitonModel
+    @using BTA.Models
+@{
+    /**/
+
+    ViewBag.Title = "InformationAboutTransportaiton";
+}
+
+<h2>InformationAboutTransportaiton</h2>
+
+@if (TempData["transport"] != null)
+{
+
+      <p>  From @Model.CityName to @Model.CityName1 there is transportation @Model.TransportaitonTypeName with company @Model.TransportationProviderName with average rating:@Model.prosek</p>
+
+    <p>User comments</p>
+    foreach (TransportaitonModel komentari in Admin.TransportationFeedbackPoSifri(Model.TransportaitonProviderID))
+    {
+    <div class="comment-div">
+
+        <p>@komentari.Comment</p>
+        <small>@komentari.Date</small>
+        <br />
+        <p>User rating:@komentari.StarRating</p>
+        <small>@komentari.Date1</small>
+        <br />
+        <small>@komentari.UserName</small>
+
+
+
+
+        @if (int.Parse(Session["rola"].ToString()) == 1)
+        {
+            using (Html.BeginForm("DeleteComment2", "Account", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => komentari.FeedBackID)
+                @Html.HiddenFor(m => komentari.CommentID);
+                @Html.HiddenFor(m => komentari.RatingID)
+                @Html.HiddenFor(m => komentari.UserID);
+                @Html.HiddenFor(m => komentari.CityID);
+                @Html.HiddenFor(m => komentari.Date);
+                @Html.HiddenFor(m => komentari.Date1)
+
+                @Html.HiddenFor(m => Model.CityName)
+
+
+                @Html.HiddenFor(m => komentari.UserName)
+
+
+                @Html.HiddenFor(m => Model.UserID)
+                @Html.HiddenFor(m => Model.CityID)
+
+                @Html.HiddenFor(m => Model.prosek)
+
+                @Html.HiddenFor(m => Model.TransportaitonProviderID)
+                @Html.HiddenFor(m => Model.CityName1)
+                @Html.HiddenFor(m=>Model.TransportationProviderName)
+                @Html.HiddenFor(m=>Model.TransportaionTypeID)
+                @Html.HiddenFor(m=>Model.TransportaitonTypeName)
+
+
+   <input type="submit" value="Delete Comment" style="margin-top:10px" class="btn btn-default confirm-btn" />
+            }
+        }
+
+
+        </div>
+    }
+}
+
+
+
+
+
+
+
+
+@using (Html.BeginForm("DodajKomentar2", "Account", FormMethod.Post, new { @class = "form" }))
+
+{
+    <div>
+        @Html.LabelFor(m => m.Comment, "Put your comment about this transportation")
+        <br />
+        @Html.TextAreaFor(m => m.Comment, new { @class = "form" })
+        @Html.ValidationMessageFor(m => m.Comment)
+        <br />
+        @Html.LabelFor(m => m.StarRating, "Please rate this transportation")
+        <br />
+        @Html.TextBoxFor(m => m.StarRating, new { @class = "form" })
+        @Html.ValidationMessageFor(m => m.StarRating)
+
+        @Html.HiddenFor(m => Model.TransportaitonID)
+
+
+
+
+
+
+        @Html.HiddenFor(m => Model.CityName)
+        @Html.HiddenFor(m => Model.CityName1)
+        @Html.HiddenFor(m => Model.TransportaitonTypeName)
+        @Html.HiddenFor(m => Model.TransportationProviderName)
+        @Html.HiddenFor(m => Model.UserName)
+
+
+        @Html.HiddenFor(m => Model.UserID)
+        @Html.HiddenFor(m => Model.CityID)
+
+        @Html.HiddenFor(m => Model.prosek)
+        @Html.HiddenFor(m => m.TransportaitonProviderID)
+
+
+
+
+
+
+
+        <br />
+        <br />
+        <input type="submit" value="Add comment about this city-category" class="btn btn-default confirm-btn" style="font-size:10px" />
+
+    </div>
+
+
+    
+    }
+    @if (TempData["nematransporta"] != null)
+    {
+        <div>
+            There is no information about search critera you have entered try something else
+            <div>
+                <a href="@Url.Action("EnjoyYourTravel", "Account")">search again</a>
+            </div>
+        </div>
+    }
+
+

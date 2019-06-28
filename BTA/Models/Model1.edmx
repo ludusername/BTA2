@@ -1,0 +1,1677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccCategory">
+          <Key>
+            <PropertyRef Name="AccCategoryID" />
+          </Key>
+          <Property Name="AccCategoryID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccFeedback">
+          <Key>
+            <PropertyRef Name="AccFeedbackID" />
+          </Key>
+          <Property Name="AccFeedbackID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="StarRating" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="text" />
+          <Property Name="DateTimeOfFeedback" Type="datetime" Nullable="false" />
+          <Property Name="AccommodationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accommodation">
+          <Key>
+            <PropertyRef Name="AccommodationID" />
+          </Key>
+          <Property Name="AccommodationID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccCategoryID" Type="int" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="Lat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lng" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CityCategory">
+          <Key>
+            <PropertyRef Name="CityCategoryID" />
+          </Key>
+          <Property Name="CityCategoryID" Type="int" Nullable="false" />
+          <Property Name="CityCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CityComments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="text" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CityInfoByCategory">
+          <Key>
+            <PropertyRef Name="CityID" />
+            <PropertyRef Name="CityCategoryID" />
+          </Key>
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="CityCategoryID" Type="int" Nullable="false" />
+          <Property Name="Info" Type="text" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="int" Nullable="false" />
+          <Property Name="CommentID" Type="int" Nullable="false" />
+          <Property Name="RatingID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TransportationProviderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Transportaiton">
+          <Key>
+            <PropertyRef Name="TransportaitonID" />
+          </Key>
+          <Property Name="TransportaitonID" Type="int" Nullable="false" />
+          <Property Name="CityFromID" Type="int" Nullable="false" />
+          <Property Name="CityToID" Type="int" Nullable="false" />
+          <Property Name="TransportaionTypeID" Type="int" Nullable="false" />
+          <Property Name="TransportaitonProviderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransportaitonProvider">
+          <Key>
+            <PropertyRef Name="TransportationProviderID" />
+          </Key>
+          <Property Name="TransportationProviderID" Type="int" Nullable="false" />
+          <Property Name="TransportationProviderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StreetNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransportaitonTypeID" Type="int" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransportaitonType">
+          <Key>
+            <PropertyRef Name="TransportaitonTypeID" />
+          </Key>
+          <Property Name="TransportaitonTypeID" Type="int" Nullable="false" />
+          <Property Name="TransportaitonTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransportationFeedback">
+          <Key>
+            <PropertyRef Name="FeedBackID" />
+          </Key>
+          <Property Name="FeedBackID" Type="int" Nullable="false" />
+          <Property Name="CommentID" Type="int" />
+          <Property Name="RatingID" Type="int" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TransportationProviderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransportatitonComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="text" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TransportationProviderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransportatitonRating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="StarRating" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TrasportationProviderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccFeedback_Accommodation">
+          <End Role="Accommodation" Type="Self.Accommodation" Multiplicity="1" />
+          <End Role="AccFeedback" Type="Self.AccFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accommodation">
+              <PropertyRef Name="AccommodationID" />
+            </Principal>
+            <Dependent Role="AccFeedback">
+              <PropertyRef Name="AccommodationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccFeedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AccFeedback" Type="Self.AccFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AccFeedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accommodation_AccCategory">
+          <End Role="AccCategory" Type="Self.AccCategory" Multiplicity="1" />
+          <End Role="Accommodation" Type="Self.Accommodation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccCategory">
+              <PropertyRef Name="AccCategoryID" />
+            </Principal>
+            <Dependent Role="Accommodation">
+              <PropertyRef Name="AccCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accommodation_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Accommodation" Type="Self.Accommodation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Accommodation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityComments_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="CityComments" Type="Self.CityComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="CityComments">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityComments_CityCategory">
+          <End Role="CityCategory" Type="Self.CityCategory" Multiplicity="1" />
+          <End Role="CityComments" Type="Self.CityComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityCategory">
+              <PropertyRef Name="CityCategoryID" />
+            </Principal>
+            <Dependent Role="CityComments">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityComments_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CityComments" Type="Self.CityComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CityComments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityInfoByCategory_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="CityInfoByCategory" Type="Self.CityInfoByCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="CityInfoByCategory">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityInfoByCategory_CityCategory">
+          <End Role="CityCategory" Type="Self.CityCategory" Multiplicity="1" />
+          <End Role="CityInfoByCategory" Type="Self.CityInfoByCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityCategory">
+              <PropertyRef Name="CityCategoryID" />
+            </Principal>
+            <Dependent Role="CityInfoByCategory">
+              <PropertyRef Name="CityCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityInfoByCategory_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CityInfoByCategory" Type="Self.CityInfoByCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CityInfoByCategory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeedBack_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="FeedBack" Type="Self.FeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FeedBack">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Transportaiton" Type="Self.Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="CityFromID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_City1">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Transportaiton" Type="Self.Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="CityToID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_TransportaitonProvider">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="Transportaiton" Type="Self.Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="TransportaitonProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_TransportaitonType">
+          <End Role="TransportaitonType" Type="Self.TransportaitonType" Multiplicity="1" />
+          <End Role="Transportaiton" Type="Self.Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonType">
+              <PropertyRef Name="TransportaitonTypeID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="TransportaionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportaitonProvider_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TransportaitonProvider">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportaitonProvider_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TransportaitonProvider">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportaitonProvider_TransportaitonType">
+          <End Role="TransportaitonType" Type="Self.TransportaitonType" Multiplicity="1" />
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonType">
+              <PropertyRef Name="TransportaitonTypeID" />
+            </Principal>
+            <Dependent Role="TransportaitonProvider">
+              <PropertyRef Name="TransportaitonTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_TransportaitonProvider1">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="TransportationProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_TransportatitonComment">
+          <End Role="TransportatitonComment" Type="Self.TransportatitonComment" Multiplicity="0..1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportatitonComment">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_TransportatitonRating">
+          <End Role="TransportatitonRating" Type="Self.TransportatitonRating" Multiplicity="0..1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportatitonRating">
+              <PropertyRef Name="RatingID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="RatingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonComment_TransportaitonProvider1">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="TransportatitonComment" Type="Self.TransportatitonComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="TransportatitonComment">
+              <PropertyRef Name="TransportationProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonComment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TransportatitonComment" Type="Self.TransportatitonComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TransportatitonComment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonRating_TransportaitonProvider1">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="TransportatitonRating" Type="Self.TransportatitonRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="TransportatitonRating">
+              <PropertyRef Name="TrasportationProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonRating_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TransportatitonRating" Type="Self.TransportatitonRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TransportatitonRating">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AccCategory" EntityType="Self.AccCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccFeedback" EntityType="Self.AccFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accommodation" EntityType="Self.Accommodation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CityCategory" EntityType="Self.CityCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CityComments" EntityType="Self.CityComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CityInfoByCategory" EntityType="Self.CityInfoByCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedBack" EntityType="Self.FeedBack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transportaiton" EntityType="Self.Transportaiton" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransportaitonProvider" EntityType="Self.TransportaitonProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransportaitonType" EntityType="Self.TransportaitonType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransportationFeedback" EntityType="Self.TransportationFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransportatitonComment" EntityType="Self.TransportatitonComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransportatitonRating" EntityType="Self.TransportatitonRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccFeedback_Accommodation" Association="Self.FK_AccFeedback_Accommodation">
+            <End Role="Accommodation" EntitySet="Accommodation" />
+            <End Role="AccFeedback" EntitySet="AccFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccFeedback_User" Association="Self.FK_AccFeedback_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AccFeedback" EntitySet="AccFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accommodation_AccCategory" Association="Self.FK_Accommodation_AccCategory">
+            <End Role="AccCategory" EntitySet="AccCategory" />
+            <End Role="Accommodation" EntitySet="Accommodation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accommodation_City" Association="Self.FK_Accommodation_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Accommodation" EntitySet="Accommodation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityComments_City" Association="Self.FK_CityComments_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="CityComments" EntitySet="CityComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityComments_CityCategory" Association="Self.FK_CityComments_CityCategory">
+            <End Role="CityCategory" EntitySet="CityCategory" />
+            <End Role="CityComments" EntitySet="CityComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityComments_User" Association="Self.FK_CityComments_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CityComments" EntitySet="CityComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityInfoByCategory_City" Association="Self.FK_CityInfoByCategory_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="CityInfoByCategory" EntitySet="CityInfoByCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityInfoByCategory_CityCategory" Association="Self.FK_CityInfoByCategory_CityCategory">
+            <End Role="CityCategory" EntitySet="CityCategory" />
+            <End Role="CityInfoByCategory" EntitySet="CityInfoByCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityInfoByCategory_User" Association="Self.FK_CityInfoByCategory_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CityInfoByCategory" EntitySet="CityInfoByCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeedBack_User" Association="Self.FK_FeedBack_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="FeedBack" EntitySet="FeedBack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_City" Association="Self.FK_Transportaiton_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Transportaiton" EntitySet="Transportaiton" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_City1" Association="Self.FK_Transportaiton_City1">
+            <End Role="City" EntitySet="City" />
+            <End Role="Transportaiton" EntitySet="Transportaiton" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_TransportaitonProvider" Association="Self.FK_Transportaiton_TransportaitonProvider">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProvider" />
+            <End Role="Transportaiton" EntitySet="Transportaiton" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_TransportaitonType" Association="Self.FK_Transportaiton_TransportaitonType">
+            <End Role="TransportaitonType" EntitySet="TransportaitonType" />
+            <End Role="Transportaiton" EntitySet="Transportaiton" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportaitonProvider_City" Association="Self.FK_TransportaitonProvider_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProvider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportaitonProvider_Country" Association="Self.FK_TransportaitonProvider_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProvider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportaitonProvider_TransportaitonType" Association="Self.FK_TransportaitonProvider_TransportaitonType">
+            <End Role="TransportaitonType" EntitySet="TransportaitonType" />
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProvider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_TransportaitonProvider1" Association="Self.FK_TransportationFeedback_TransportaitonProvider1">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProvider" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_TransportatitonComment" Association="Self.FK_TransportationFeedback_TransportatitonComment">
+            <End Role="TransportatitonComment" EntitySet="TransportatitonComment" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_TransportatitonRating" Association="Self.FK_TransportationFeedback_TransportatitonRating">
+            <End Role="TransportatitonRating" EntitySet="TransportatitonRating" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_User" Association="Self.FK_TransportationFeedback_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonComment_TransportaitonProvider1" Association="Self.FK_TransportatitonComment_TransportaitonProvider1">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProvider" />
+            <End Role="TransportatitonComment" EntitySet="TransportatitonComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonComment_User" Association="Self.FK_TransportatitonComment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TransportatitonComment" EntitySet="TransportatitonComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonRating_TransportaitonProvider1" Association="Self.FK_TransportatitonRating_TransportaitonProvider1">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProvider" />
+            <End Role="TransportatitonRating" EntitySet="TransportatitonRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonRating_User" Association="Self.FK_TransportatitonRating_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TransportatitonRating" EntitySet="TransportatitonRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccCategory">
+          <Key>
+            <PropertyRef Name="AccCategoryID" />
+          </Key>
+          <Property Name="AccCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accommodations" Relationship="Self.FK_Accommodation_AccCategory" FromRole="AccCategory" ToRole="Accommodation" />
+        </EntityType>
+        <EntityType Name="AccFeedback">
+          <Key>
+            <PropertyRef Name="AccFeedbackID" />
+          </Key>
+          <Property Name="AccFeedbackID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="StarRating" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateTimeOfFeedback" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccommodationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accommodation" Relationship="Self.FK_AccFeedback_Accommodation" FromRole="AccFeedback" ToRole="Accommodation" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AccFeedback_User" FromRole="AccFeedback" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Accommodation">
+          <Key>
+            <PropertyRef Name="AccommodationID" />
+          </Key>
+          <Property Name="AccommodationID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AccCategory" Relationship="Self.FK_Accommodation_AccCategory" FromRole="Accommodation" ToRole="AccCategory" />
+          <NavigationProperty Name="AccFeedbacks" Relationship="Self.FK_AccFeedback_Accommodation" FromRole="Accommodation" ToRole="AccFeedback" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Accommodation_City" FromRole="Accommodation" ToRole="City" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accommodations" Relationship="Self.FK_Accommodation_City" FromRole="City" ToRole="Accommodation" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_City_Country" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="CityInfoByCategories" Relationship="Self.FK_CityInfoByCategory_City" FromRole="City" ToRole="CityInfoByCategory" />
+          <NavigationProperty Name="Transportaitons" Relationship="Self.FK_Transportaiton_City" FromRole="City" ToRole="Transportaiton" />
+          <NavigationProperty Name="Transportaitons1" Relationship="Self.FK_Transportaiton_City1" FromRole="City" ToRole="Transportaiton" />
+          <NavigationProperty Name="TransportaitonProviders" Relationship="Model.FK_TransportaitonProvider_City" FromRole="City" ToRole="TransportaitonProvider" />
+          <Property Name="Lat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lng" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CityComments" Relationship="Model.FK_CityComments_City" FromRole="City" ToRole="CityComment" />
+        </EntityType>
+        <EntityType Name="CityCategory">
+          <Key>
+            <PropertyRef Name="CityCategoryID" />
+          </Key>
+          <Property Name="CityCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CityCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CityComments" Relationship="Self.FK_CityComments_CityCategory" FromRole="CityCategory" ToRole="CityComments" />
+          <NavigationProperty Name="CityInfoByCategories" Relationship="Self.FK_CityInfoByCategory_CityCategory" FromRole="CityCategory" ToRole="CityInfoByCategory" />
+        </EntityType>
+        <EntityType Name="CityComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CityCategory" Relationship="Self.FK_CityComments_CityCategory" FromRole="CityComments" ToRole="CityCategory" />
+          <NavigationProperty Name="User" Relationship="Self.FK_CityComments_User" FromRole="CityComments" ToRole="User" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Model.FK_CityComments_City" FromRole="CityComment" ToRole="City" />
+        </EntityType>
+        <EntityType Name="CityInfoByCategory">
+          <Key>
+            <PropertyRef Name="CityID" />
+            <PropertyRef Name="CityCategoryID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="CityCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="City" Relationship="Self.FK_CityInfoByCategory_City" FromRole="CityInfoByCategory" ToRole="City" />
+          <NavigationProperty Name="CityCategory" Relationship="Self.FK_CityInfoByCategory_CityCategory" FromRole="CityInfoByCategory" ToRole="CityCategory" />
+          <NavigationProperty Name="User" Relationship="Self.FK_CityInfoByCategory_User" FromRole="CityInfoByCategory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_City_Country" FromRole="Country" ToRole="City" />
+          <NavigationProperty Name="TransportaitonProviders" Relationship="Model.FK_TransportaitonProvider_Country" FromRole="Country" ToRole="TransportaitonProvider" />
+        </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="Int32" Nullable="false" />
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
+          <Property Name="RatingID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TransportationProviderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_FeedBack_User" FromRole="FeedBack" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Transportaiton">
+          <Key>
+            <PropertyRef Name="TransportaitonID" />
+          </Key>
+          <Property Name="TransportaitonID" Type="Int32" Nullable="false" />
+          <Property Name="CityFromID" Type="Int32" Nullable="false" />
+          <Property Name="CityToID" Type="Int32" Nullable="false" />
+          <Property Name="TransportaitonProviderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Transportaiton_City" FromRole="Transportaiton" ToRole="City" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Transportaiton_City1" FromRole="Transportaiton" ToRole="City" />
+          <NavigationProperty Name="TransportaitonProvider" Relationship="Self.FK_Transportaiton_TransportaitonProvider" FromRole="Transportaiton" ToRole="TransportaitonProvider" />
+          <Property Name="TransportaionTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TransportaitonType" Relationship="Model.FK_Transportaiton_TransportaitonType" FromRole="Transportaiton" ToRole="TransportaitonType" />
+        </EntityType>
+        <EntityType Name="TransportaitonProvider">
+          <Key>
+            <PropertyRef Name="TransportationProviderID" />
+          </Key>
+          <Property Name="TransportationProviderID" Type="Int32" Nullable="false" />
+          <Property Name="TransportationProviderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Transportaitons" Relationship="Self.FK_Transportaiton_TransportaitonProvider" FromRole="TransportaitonProvider" ToRole="Transportaiton" />
+          <NavigationProperty Name="TransportationFeedbacks" Relationship="Self.FK_TransportationFeedback_TransportaitonProvider1" FromRole="TransportaitonProvider" ToRole="TransportationFeedback" />
+          <NavigationProperty Name="TransportatitonComments" Relationship="Self.FK_TransportatitonComment_TransportaitonProvider1" FromRole="TransportaitonProvider" ToRole="TransportatitonComment" />
+          <NavigationProperty Name="TransportatitonRatings" Relationship="Self.FK_TransportatitonRating_TransportaitonProvider1" FromRole="TransportaitonProvider" ToRole="TransportatitonRating" />
+          <Property Name="TransportaitonTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TransportaitonType" Relationship="Model.FK_TransportaitonProvider_TransportaitonType" FromRole="TransportaitonProvider" ToRole="TransportaitonType" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Model.FK_TransportaitonProvider_City" FromRole="TransportaitonProvider" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="Model.FK_TransportaitonProvider_Country" FromRole="TransportaitonProvider" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="TransportaitonType">
+          <Key>
+            <PropertyRef Name="TransportaitonTypeID" />
+          </Key>
+          <Property Name="TransportaitonTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TransportaitonTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TransportaitonProviders" Relationship="Model.FK_TransportaitonProvider_TransportaitonType" FromRole="TransportaitonType" ToRole="TransportaitonProvider" />
+          <NavigationProperty Name="Transportaitons" Relationship="Model.FK_Transportaiton_TransportaitonType" FromRole="TransportaitonType" ToRole="Transportaiton" />
+        </EntityType>
+        <EntityType Name="TransportationFeedback">
+          <Key>
+            <PropertyRef Name="FeedBackID" />
+          </Key>
+          <Property Name="FeedBackID" Type="Int32" Nullable="false" />
+          <Property Name="CommentID" Type="Int32" />
+          <Property Name="RatingID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TransportationProviderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TransportaitonProvider" Relationship="Self.FK_TransportationFeedback_TransportaitonProvider1" FromRole="TransportationFeedback" ToRole="TransportaitonProvider" />
+          <NavigationProperty Name="TransportatitonComment" Relationship="Self.FK_TransportationFeedback_TransportatitonComment" FromRole="TransportationFeedback" ToRole="TransportatitonComment" />
+          <NavigationProperty Name="TransportatitonRating" Relationship="Self.FK_TransportationFeedback_TransportatitonRating" FromRole="TransportationFeedback" ToRole="TransportatitonRating" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TransportationFeedback_User" FromRole="TransportationFeedback" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TransportatitonComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransportationProviderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TransportaitonProvider" Relationship="Self.FK_TransportatitonComment_TransportaitonProvider1" FromRole="TransportatitonComment" ToRole="TransportaitonProvider" />
+          <NavigationProperty Name="TransportationFeedbacks" Relationship="Self.FK_TransportationFeedback_TransportatitonComment" FromRole="TransportatitonComment" ToRole="TransportationFeedback" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TransportatitonComment_User" FromRole="TransportatitonComment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TransportatitonRating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="StarRating" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TrasportationProviderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TransportaitonProvider" Relationship="Self.FK_TransportatitonRating_TransportaitonProvider1" FromRole="TransportatitonRating" ToRole="TransportaitonProvider" />
+          <NavigationProperty Name="TransportationFeedbacks" Relationship="Self.FK_TransportationFeedback_TransportatitonRating" FromRole="TransportatitonRating" ToRole="TransportationFeedback" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TransportatitonRating_User" FromRole="TransportatitonRating" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccFeedbacks" Relationship="Self.FK_AccFeedback_User" FromRole="User" ToRole="AccFeedback" />
+          <NavigationProperty Name="CityComments" Relationship="Self.FK_CityComments_User" FromRole="User" ToRole="CityComments" />
+          <NavigationProperty Name="CityInfoByCategories" Relationship="Self.FK_CityInfoByCategory_User" FromRole="User" ToRole="CityInfoByCategory" />
+          <NavigationProperty Name="FeedBacks" Relationship="Self.FK_FeedBack_User" FromRole="User" ToRole="FeedBack" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="TransportationFeedbacks" Relationship="Self.FK_TransportationFeedback_User" FromRole="User" ToRole="TransportationFeedback" />
+          <NavigationProperty Name="TransportatitonComments" Relationship="Self.FK_TransportatitonComment_User" FromRole="User" ToRole="TransportatitonComment" />
+          <NavigationProperty Name="TransportatitonRatings" Relationship="Self.FK_TransportatitonRating_User" FromRole="User" ToRole="TransportatitonRating" />
+        </EntityType>
+        <Association Name="FK_Accommodation_AccCategory">
+          <End Role="AccCategory" Type="Self.AccCategory" Multiplicity="1" />
+          <End Role="Accommodation" Type="Self.Accommodation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccCategory">
+              <PropertyRef Name="AccCategoryID" />
+            </Principal>
+            <Dependent Role="Accommodation">
+              <PropertyRef Name="AccCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccFeedback_Accommodation">
+          <End Role="Accommodation" Type="Self.Accommodation" Multiplicity="1" />
+          <End Role="AccFeedback" Type="Self.AccFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accommodation">
+              <PropertyRef Name="AccommodationID" />
+            </Principal>
+            <Dependent Role="AccFeedback">
+              <PropertyRef Name="AccommodationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccFeedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AccFeedback" Type="Self.AccFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AccFeedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accommodation_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Accommodation" Type="Self.Accommodation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Accommodation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityInfoByCategory_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="CityInfoByCategory" Type="Self.CityInfoByCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="CityInfoByCategory">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Transportaiton" Type="Self.Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="CityFromID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_City1">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Transportaiton" Type="Self.Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="CityToID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityComments_CityCategory">
+          <End Role="CityCategory" Type="Self.CityCategory" Multiplicity="1" />
+          <End Role="CityComments" Type="Self.CityComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityCategory">
+              <PropertyRef Name="CityCategoryID" />
+            </Principal>
+            <Dependent Role="CityComments">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityInfoByCategory_CityCategory">
+          <End Role="CityCategory" Type="Self.CityCategory" Multiplicity="1" />
+          <End Role="CityInfoByCategory" Type="Self.CityInfoByCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityCategory">
+              <PropertyRef Name="CityCategoryID" />
+            </Principal>
+            <Dependent Role="CityInfoByCategory">
+              <PropertyRef Name="CityCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityComments_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CityComments" Type="Self.CityComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CityComments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityInfoByCategory_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CityInfoByCategory" Type="Self.CityInfoByCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CityInfoByCategory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeedBack_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="FeedBack" Type="Self.FeedBack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FeedBack">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_TransportaitonProvider">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="Transportaiton" Type="Self.Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="TransportaitonProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_TransportaitonProvider1">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="TransportationProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonComment_TransportaitonProvider1">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="TransportatitonComment" Type="Self.TransportatitonComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="TransportatitonComment">
+              <PropertyRef Name="TransportationProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonRating_TransportaitonProvider1">
+          <End Role="TransportaitonProvider" Type="Self.TransportaitonProvider" Multiplicity="1" />
+          <End Role="TransportatitonRating" Type="Self.TransportatitonRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonProvider">
+              <PropertyRef Name="TransportationProviderID" />
+            </Principal>
+            <Dependent Role="TransportatitonRating">
+              <PropertyRef Name="TrasportationProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_TransportatitonComment">
+          <End Role="TransportatitonComment" Type="Self.TransportatitonComment" Multiplicity="0..1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportatitonComment">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_TransportatitonRating">
+          <End Role="TransportatitonRating" Type="Self.TransportatitonRating" Multiplicity="0..1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportatitonRating">
+              <PropertyRef Name="RatingID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="RatingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportationFeedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TransportationFeedback" Type="Self.TransportationFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TransportationFeedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonComment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TransportatitonComment" Type="Self.TransportatitonComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TransportatitonComment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportatitonRating_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TransportatitonRating" Type="Self.TransportatitonRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TransportatitonRating">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccCategories" EntityType="Self.AccCategory" />
+          <EntitySet Name="AccFeedbacks" EntityType="Self.AccFeedback" />
+          <EntitySet Name="Accommodations" EntityType="Self.Accommodation" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="CityCategories" EntityType="Self.CityCategory" />
+          <EntitySet Name="CityComments" EntityType="Self.CityComment" />
+          <EntitySet Name="CityInfoByCategories" EntityType="Self.CityInfoByCategory" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="FeedBacks" EntityType="Self.FeedBack" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Transportaitons" EntityType="Self.Transportaiton" />
+          <EntitySet Name="TransportaitonProviders" EntityType="Self.TransportaitonProvider" />
+          <EntitySet Name="TransportaitonTypes" EntityType="Self.TransportaitonType" />
+          <EntitySet Name="TransportationFeedbacks" EntityType="Self.TransportationFeedback" />
+          <EntitySet Name="TransportatitonComments" EntityType="Self.TransportatitonComment" />
+          <EntitySet Name="TransportatitonRatings" EntityType="Self.TransportatitonRating" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Accommodation_AccCategory" Association="Self.FK_Accommodation_AccCategory">
+            <End Role="AccCategory" EntitySet="AccCategories" />
+            <End Role="Accommodation" EntitySet="Accommodations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccFeedback_Accommodation" Association="Self.FK_AccFeedback_Accommodation">
+            <End Role="Accommodation" EntitySet="Accommodations" />
+            <End Role="AccFeedback" EntitySet="AccFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccFeedback_User" Association="Self.FK_AccFeedback_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AccFeedback" EntitySet="AccFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accommodation_City" Association="Self.FK_Accommodation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Accommodation" EntitySet="Accommodations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityInfoByCategory_City" Association="Self.FK_CityInfoByCategory_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="CityInfoByCategory" EntitySet="CityInfoByCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_City" Association="Self.FK_Transportaiton_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Transportaiton" EntitySet="Transportaitons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_City1" Association="Self.FK_Transportaiton_City1">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Transportaiton" EntitySet="Transportaitons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityComments_CityCategory" Association="Self.FK_CityComments_CityCategory">
+            <End Role="CityCategory" EntitySet="CityCategories" />
+            <End Role="CityComments" EntitySet="CityComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityInfoByCategory_CityCategory" Association="Self.FK_CityInfoByCategory_CityCategory">
+            <End Role="CityCategory" EntitySet="CityCategories" />
+            <End Role="CityInfoByCategory" EntitySet="CityInfoByCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityComments_User" Association="Self.FK_CityComments_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CityComments" EntitySet="CityComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityInfoByCategory_User" Association="Self.FK_CityInfoByCategory_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CityInfoByCategory" EntitySet="CityInfoByCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeedBack_User" Association="Self.FK_FeedBack_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FeedBack" EntitySet="FeedBacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_TransportaitonProvider" Association="Self.FK_Transportaiton_TransportaitonProvider">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProviders" />
+            <End Role="Transportaiton" EntitySet="Transportaitons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_TransportaitonProvider1" Association="Self.FK_TransportationFeedback_TransportaitonProvider1">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProviders" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonComment_TransportaitonProvider1" Association="Self.FK_TransportatitonComment_TransportaitonProvider1">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProviders" />
+            <End Role="TransportatitonComment" EntitySet="TransportatitonComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonRating_TransportaitonProvider1" Association="Self.FK_TransportatitonRating_TransportaitonProvider1">
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProviders" />
+            <End Role="TransportatitonRating" EntitySet="TransportatitonRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_TransportatitonComment" Association="Self.FK_TransportationFeedback_TransportatitonComment">
+            <End Role="TransportatitonComment" EntitySet="TransportatitonComments" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_TransportatitonRating" Association="Self.FK_TransportationFeedback_TransportatitonRating">
+            <End Role="TransportatitonRating" EntitySet="TransportatitonRatings" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportationFeedback_User" Association="Self.FK_TransportationFeedback_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TransportationFeedback" EntitySet="TransportationFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonComment_User" Association="Self.FK_TransportatitonComment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TransportatitonComment" EntitySet="TransportatitonComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportatitonRating_User" Association="Self.FK_TransportatitonRating_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TransportatitonRating" EntitySet="TransportatitonRatings" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_TransportaitonProvider_TransportaitonType" Association="Model.FK_TransportaitonProvider_TransportaitonType">
+            <End Role="TransportaitonType" EntitySet="TransportaitonTypes" />
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProviders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportaitonProvider_City" Association="Model.FK_TransportaitonProvider_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProviders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransportaitonProvider_Country" Association="Model.FK_TransportaitonProvider_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="TransportaitonProvider" EntitySet="TransportaitonProviders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transportaiton_TransportaitonType" Association="Model.FK_Transportaiton_TransportaitonType">
+            <End Role="TransportaitonType" EntitySet="TransportaitonTypes" />
+            <End Role="Transportaiton" EntitySet="Transportaitons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityComments_City" Association="Model.FK_CityComments_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="CityComment" EntitySet="CityComments" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <Association Name="FK_TransportaitonProvider_TransportaitonType">
+          <End Type="Model.TransportaitonType" Role="TransportaitonType" Multiplicity="1" />
+          <End Type="Model.TransportaitonProvider" Role="TransportaitonProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonType">
+              <PropertyRef Name="TransportaitonTypeID" />
+            </Principal>
+            <Dependent Role="TransportaitonProvider">
+              <PropertyRef Name="TransportaitonTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportaitonProvider_City">
+          <End Type="Model.City" Role="City" Multiplicity="1" />
+          <End Type="Model.TransportaitonProvider" Role="TransportaitonProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TransportaitonProvider">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransportaitonProvider_Country">
+          <End Type="Model.Country" Role="Country" Multiplicity="1" />
+          <End Type="Model.TransportaitonProvider" Role="TransportaitonProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TransportaitonProvider">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transportaiton_TransportaitonType">
+          <End Type="Model.TransportaitonType" Role="TransportaitonType" Multiplicity="1" />
+          <End Type="Model.Transportaiton" Role="Transportaiton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransportaitonType">
+              <PropertyRef Name="TransportaitonTypeID" />
+            </Principal>
+            <Dependent Role="Transportaiton">
+              <PropertyRef Name="TransportaionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityComments_City">
+          <End Type="Model.City" Role="City" Multiplicity="1" />
+          <End Type="Model.CityComment" Role="CityComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="CityComment">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AccCategories">
+            <EntityTypeMapping TypeName="Model.AccCategory">
+              <MappingFragment StoreEntitySet="AccCategory">
+                <ScalarProperty Name="AccCategoryID" ColumnName="AccCategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccFeedbacks">
+            <EntityTypeMapping TypeName="Model.AccFeedback">
+              <MappingFragment StoreEntitySet="AccFeedback">
+                <ScalarProperty Name="AccFeedbackID" ColumnName="AccFeedbackID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="StarRating" ColumnName="StarRating" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DateTimeOfFeedback" ColumnName="DateTimeOfFeedback" />
+                <ScalarProperty Name="AccommodationID" ColumnName="AccommodationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accommodations">
+            <EntityTypeMapping TypeName="Model.Accommodation">
+              <MappingFragment StoreEntitySet="Accommodation">
+                <ScalarProperty Name="AccommodationID" ColumnName="AccommodationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AccCategoryID" ColumnName="AccCategoryID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="Model.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CityCategories">
+            <EntityTypeMapping TypeName="Model.CityCategory">
+              <MappingFragment StoreEntitySet="CityCategory">
+                <ScalarProperty Name="CityCategoryID" ColumnName="CityCategoryID" />
+                <ScalarProperty Name="CityCategoryName" ColumnName="CityCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CityComments">
+            <EntityTypeMapping TypeName="Model.CityComment">
+              <MappingFragment StoreEntitySet="CityComments">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CityInfoByCategories">
+            <EntityTypeMapping TypeName="Model.CityInfoByCategory">
+              <MappingFragment StoreEntitySet="CityInfoByCategory">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CityCategoryID" ColumnName="CityCategoryID" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="Model.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedBacks">
+            <EntityTypeMapping TypeName="Model.FeedBack">
+              <MappingFragment StoreEntitySet="FeedBack">
+                <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TransportationProviderID" ColumnName="TransportationProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transportaitons">
+            <EntityTypeMapping TypeName="Model.Transportaiton">
+              <MappingFragment StoreEntitySet="Transportaiton">
+                <ScalarProperty Name="TransportaionTypeID" ColumnName="TransportaionTypeID" />
+                <ScalarProperty Name="TransportaitonID" ColumnName="TransportaitonID" />
+                <ScalarProperty Name="CityFromID" ColumnName="CityFromID" />
+                <ScalarProperty Name="CityToID" ColumnName="CityToID" />
+                <ScalarProperty Name="TransportaitonProviderID" ColumnName="TransportaitonProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransportaitonProviders">
+            <EntityTypeMapping TypeName="Model.TransportaitonProvider">
+              <MappingFragment StoreEntitySet="TransportaitonProvider">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="TransportaitonTypeID" ColumnName="TransportaitonTypeID" />
+                <ScalarProperty Name="TransportationProviderID" ColumnName="TransportationProviderID" />
+                <ScalarProperty Name="TransportationProviderName" ColumnName="TransportationProviderName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransportaitonTypes">
+            <EntityTypeMapping TypeName="Model.TransportaitonType">
+              <MappingFragment StoreEntitySet="TransportaitonType">
+                <ScalarProperty Name="TransportaitonTypeID" ColumnName="TransportaitonTypeID" />
+                <ScalarProperty Name="TransportaitonTypeName" ColumnName="TransportaitonTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransportationFeedbacks">
+            <EntityTypeMapping TypeName="Model.TransportationFeedback">
+              <MappingFragment StoreEntitySet="TransportationFeedback">
+                <ScalarProperty Name="FeedBackID" ColumnName="FeedBackID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TransportationProviderID" ColumnName="TransportationProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransportatitonComments">
+            <EntityTypeMapping TypeName="Model.TransportatitonComment">
+              <MappingFragment StoreEntitySet="TransportatitonComment">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TransportationProviderID" ColumnName="TransportationProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransportatitonRatings">
+            <EntityTypeMapping TypeName="Model.TransportatitonRating">
+              <MappingFragment StoreEntitySet="TransportatitonRating">
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="StarRating" ColumnName="StarRating" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TrasportationProviderID" ColumnName="TrasportationProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Model.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

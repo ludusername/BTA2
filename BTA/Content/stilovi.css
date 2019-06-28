@@ -1,0 +1,169 @@
+﻿* {
+    transition: 0.7s all;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.body-content {
+    margin-top:100px;
+}
+.register-body {
+    background-image: url('../Images/bg01.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+.navbar-brand {
+    padding: 15px!important;
+    font-size: 20px!important;
+}
+.images {
+    width: 33%;
+    display: inline-block;
+    position: relative;
+}
+
+.nav li a {
+    padding: 20px 15px!important;
+    font-size:20px!important;
+}
+.dropdown-menu li a {
+    padding: 10px 10px !important;
+    font-size: 15px !important;
+}
+
+.img-wrap {
+    overflow: hidden;
+    max-height: 280px;
+}
+.img-wrap img {
+    width: 100%;
+}
+.text-wrap {
+    position: absolute;
+    top: 0;
+    /*z-index: -1;*/
+    color: #fff !important;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    padding-top: 130px;
+    padding-left: 30px;
+    background-color: rgba(115, 115, 128, 0.15);
+}
+
+.text-wrap h5 {
+    font-size: 25px;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+#menu div:hover h5,
+#menu div:hover .text-wrap {
+    opacity: 0;
+}
+
+#menu div:hover img {
+    width: 110%;
+}
+
+.userInfo {
+    color: #9d9d9d;
+    padding-top: 20px;
+}
+.userInfo h4{
+    display: inline;
+    font-size:20px;
+}
+
+.btn-odjava {
+    border: 2px solid white;
+    padding: 5px !important;
+    background-color: white;
+    color: black !important;
+    border-radius: 5px;
+    margin-left:20px;
+    font-size:15px;
+}
+
+    .btn-odjava:hover {
+        color: white !important;
+        background-color: #222;
+    }
+
+.field-validation {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    color: #fff;
+}
+
+.field-validation-error {
+    padding-top:20px;
+    font-size:18px;
+    color:crimson;
+}
+
+.form-horizontal{
+    padding-top:30px;
+}
+.form-horizontal label{
+    font-size:15px;
+}
+    .form-horizontal input{
+        font-size:15px;
+        font-weight:bold;
+    }
+
+    .confirm-btn {
+        font-size: 15px;
+        background-color: #00ad5f;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: Montserrat-Bold, sans-serif;
+        padding: 15px;
+    }
+    .confirm-btn:hover {
+        background-color: #333333;
+        color:#fff;
+    }
+
+.label-danger {
+    color: crimson;
+    font-size: 15px;
+    margin-top: 20px;
+    background-color:transparent;
+}
+.label-success {
+    color: #00ad5f;
+    font-size: 15px;
+    margin-top: 20px;
+    background-color: transparent;
+}
+
+.form-search-city label, .form-search-city input, .form-search-city p, .form-search-city select{
+    font-size: 14px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+.form-search-city btn {
+    margin-top:20px;
+}
+
+.form-search-city select {
+    padding: 0px;
+    font-size: 15px;
+}
+
+.comment-div {
+    width:30%;
+    display:inline-block;
+    border: 1px solid #999;
+    padding:20px 10px;
+    margin: 10px 0;
+}
+.comment-div p {
+    font-size:16px;
+}

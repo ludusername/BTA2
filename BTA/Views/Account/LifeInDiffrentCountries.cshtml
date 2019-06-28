@@ -1,0 +1,82 @@
+﻿@using BTA.Models
+@model BTA.Models.CityInfoByCategoryViewModel
+@{
+    ViewBag.Title = "LifeInDiffrentCountries";
+}
+<head>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1549984893" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body>
+
+    @if (int.Parse(Session["rola"].ToString()) == 1)
+    {
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 m-auto">
+                    <h3 class="mb-3">Cities</h3>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control text-center" id="search" placeholder="Enter city destination">
+                    </div>
+                    <div id="match-list"></div>
+                </div>
+
+            </div>
+            <div id="map" style="width: 400px; height:400px;"></div>
+        </div>
+        <div style="margin: 10px 15px 30px;">
+
+
+            <a href="@Url.Action("AddInformationAboutLifeInTheCity", "Account")" style="font-size:16px;">Add city info</a>
+
+        </div>
+    }
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+                @using (Html.BeginForm("PrikaziInfoOGradu", "Account", FormMethod.Post, new { @class = "form form-search-city" }))
+                {
+
+
+                    @Html.LabelFor(m => m.CityName, "Search City")
+                    @Html.TextBoxFor(m => m.CityName, new { @class = "form-control", @id = "searchInput" })
+                    @Html.ValidationMessageFor(m=>m.CityName)
+
+                    <div>
+                        <p>Type of category</p>@Html.DropDownList("kategorije", (IEnumerable<SelectListItem>)ViewBag.sifrekategorije, new { @class = "form-control" })
+                    </div>
+                    <input type="submit" value="Check info about city" class="btn btn-default confirm-btn" />
+
+
+
+
+
+                }
+            </div>
+            <div class="col-md-6">
+                <img src="~/Images/search-city.jpg" style="width:100%;" />
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/axios.js"></script>
+    <script src="~/Scripts/displayMap.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/SearchCityJS.js"></script>
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

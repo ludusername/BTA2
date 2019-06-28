@@ -1,0 +1,54 @@
+﻿
+@model BTA.Models.LogInViewModel
+@{
+    ViewBag.Title = "StartPage";
+    Layout = "_LayoutLogin.cshtml";
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            @using (Html.BeginForm("LogInView", "Account", FormMethod.Post, new { @class = "login100-form validate-form" }))
+            {
+                <span class="login100-form-title p-b-34">
+                    Account Login
+                </span>
+
+                <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+                    @Html.TextBoxFor(m => m.UserName, null, new { @class = "input100", placeholder = "User name", @id = "first-name" })
+                    @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+                    @Html.PasswordFor(m => m.Password, new { @class = "input100", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Sign in
+                    </button>
+                </div>
+                <div class="w-full text-center">
+                    @Html.ActionLink("Register please", "RegisterPage", null, new { @class = "txt3" })
+                </div>
+                <div class="w-full text-center">
+                    <label class="field-validation-error">@Html.DisplayFor(m => m.LoginError)</label>
+                </div>
+            }
+            <div class="login100-more"></div>
+
+        </div>
+    </div>
+</div>
+
+<div id="dropDownSelect1"></div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+

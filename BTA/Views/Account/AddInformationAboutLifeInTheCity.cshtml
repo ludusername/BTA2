@@ -1,0 +1,36 @@
+﻿@model BTA.Models.CityInfoByCategory
+@{
+    ViewBag.Title = "AddInformationAboutLifeInTheCity";
+}
+
+<h2>Add information about life in the city</h2>
+
+
+    <div>
+        @using (Html.BeginForm("AddInformationAboutLifeInTheCity", "Account", FormMethod.Post, new { @class = "form" }))
+        {
+
+        <div class="form-group">
+            <div class="form-group">
+                <b>Name of the city:</b>@Html.DropDownList("ListaGradova", (IEnumerable<SelectListItem>)ViewBag.gradove, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <b>Type of category</b>@Html.DropDownList("kategorije", (IEnumerable<SelectListItem>)ViewBag.sifrekategorije, new { @class = "form-control" })
+            </div>
+            
+            <div class="form-group">
+                <p>Information about city</p>
+
+                @Html.TextAreaFor(m => m.Info, new { @class = "form-control", rows = "10", required = "" })
+                @Html.ValidationMessageFor(m => m.Info, "", new { @class = "text-danger" })
+            </div>
+            
+            <input type="submit" class="btn btn-default" value="Add information about city" onclick="posalji()" id="btnPosalji" />
+            
+            
+        </div>
+        }
+
+</div>
+    
+    

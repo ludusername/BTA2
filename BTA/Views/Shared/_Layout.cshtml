@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+   
+
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+    <link href="~/Content/stilovi.css" rel="stylesheet" />
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
+            type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
+            type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="row" style="width: 100%">
+                <div class="col-md-8">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @if (Session["korisnik"] != null)
+                        {
+                            @Html.ActionLink("Business Trip Advisor", "UserPage", "Account", new { area = "" }, new { @class = "navbar-brand" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Business Trip Advisor", "StartPage", "Account", new { area = "" }, new { @class = "navbar-brand" })
+
+                        }
+
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav" style="flex-direction: row">
+
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                            @if (Session["korisnik"] != null)
+                            {
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Main menu </a>
+                                    <ul class="dropdown-menu" role="menu" style="position:absolute">
+                                        <li><a href="@Url.Action("UserPage","Account")">Home Page</a></li>
+                                        <li><a href="@Url.Action("LifeInDiffrentCountries","Account")">Life in different countries</a></li>
+                                        <li><a href="@Url.Action("ChooseThebestAccomodation","Account")">Choose the best accommodation</a></li>
+                                        <li><a href="@Url.Action("EnjoyYourTravel","Account")">Enjoy your travel</a></li>
+                                        <li><a href="@Url.Action("Feedbacks","Account")">Feedbacks</a></li>
+                                        @if (int.Parse(Session["rola"].ToString()) == 1)
+                                        {
+                                            <li><a href="@Url.Action("Providers","Account")">Providers</a></li>
+                                        }
+
+                                    </ul>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="userInfo">
+                        @if (Session["korisnik"] != null)
+                        {
+                            <h4>Welcome, @Session["korisnik"].ToString()</h4>
+                        }
+
+
+                        @if (Session["korisnik"] != null)
+                        {
+                            @Html.ActionLink("Log-out", "LogOut", "Account", null, new { @class = "btn btn-odjava" })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Johnny,Bane,Nesha,Maxim</p>
+        </footer>
+    </div>
+
+
+
+
+   
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

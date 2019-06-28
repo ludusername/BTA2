@@ -1,0 +1,76 @@
+﻿@model BTA.Models.FeedbackUser
+@using BTA.Models
+@{
+                /**/
+
+                /**/
+
+                /**/
+
+                ViewBag.Title = "Feedbacks";
+}
+
+
+
+@if (int.Parse(Session["rola"].ToString()) == 2)
+{
+
+    <p>Your feedbacks</p>
+    foreach (TransportaitonModel komentari in Admin.TransportationFeedbackPoUseru(Model.UserID))
+    {
+        <div class="comment-div">
+
+            <p>@komentari.Comment</p>
+            <small>@komentari.Date</small>
+            <br />
+            <p>User rating:@komentari.StarRating</p>
+            <small>@komentari.Date1</small>
+            <br />
+            <small>@komentari.UserName</small>
+            <br />
+            <small>cateegory:transportaiton</small>
+
+        </div>
+    }
+    foreach (AccommodationModel komenatari in Admin.AccomodationFeedbackPoSifriUsera(Model.UserID))
+    {
+        <div class="comment-div">
+
+            <p>@komenatari.Comment</p>
+            <p>User rating:@komenatari.StarRating1</p>
+            <small>@komenatari.DateTimeOfFeedback</small>
+            <br />
+            <small>@komenatari.UserName</small>
+            <br />
+            <small>category:accomodation</small>
+
+
+        </div>
+    }
+    foreach (CityInfoByCategoryViewModel komenatari in Admin.CityCommentPoSifriUsera(Model.UserID))
+    {
+        <div class="comment-div">
+            <p>@komenatari.Comment</p>
+            <small>@komenatari.UserName</small>
+            <br />
+            <small>@komenatari.Date.ToLongDateString()</small>
+            <br />
+            <small>category:city comments</small>
+            }
+        </div>
+    }
+}
+@if (int.Parse(Session["rola"].ToString()) == 1)
+{
+    using (Html.BeginForm("Feedbacks", "Account", FormMethod.Post, new { @class = "form" }))
+    {
+        <div class="form-group">
+            @Html.DropDownList("listaKorisnika", (IEnumerable<SelectListItem>)ViewBag.sifreusera, new { @class = "form-control" })
+
+        </div>
+
+        <input type="submit" class="btn btn-default" value="Show user comments" />
+
+
+    }
+}

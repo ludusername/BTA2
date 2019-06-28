@@ -1,0 +1,128 @@
+﻿@model BTA.Models.AccommodationModel
+@{
+    ViewBag.Title = "ChooseThebestAccomodation";
+}
+<head>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+
+
+@using (Html.BeginForm("PrikaziInfoOAcc", "Account", FormMethod.Post, new { @class = "form" }))
+{
+    <div>
+        @Html.LabelFor(m => m.Name, "Search Accomodation")
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "searchInput1" })
+        @Html.ValidationMessageFor(m => m.Name)
+        <br />
+        <br />
+        <input type="submit" value="Check info about accommodation" class="btn btn-default confirm-btn" style="font-size:10px" />
+    </div>
+}
+@if (int.Parse(Session["rola"].ToString()) == 1)
+{
+    <div>
+        @if (TempData["Naziv"] != null)
+        {
+            <div class="alert alert-success">New accomodation:@TempData["Naziv"] succsesfully added</div>
+        }
+        @if (TempData["Izmena"] != null)
+        {
+            <div class="alert alert-success">Succsefully edited accomodation details :@TempData["Izmena"]</div>
+        }
+
+        <div class="container panel-container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Accomodation admin panel page </div>
+                        <div class="panel-body">
+                            <div class="panel panel-primary">
+                                <div class="panel panel-heading">Add accomodation</div>
+                                <div class="panel-body">
+                                    @using (Html.BeginForm("Accomodations", "Account", FormMethod.Post, new { @class = "form" }))
+                                    {
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Name, "Accomodation name")
+                                            @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control", placeholder = "Accomodation name" })
+                                            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Address, "Adress of the accomodation")
+                                            @Html.TextBoxFor(m => m.Address, null, new { @class = "form-control", placeholder = "address" })
+                                            @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Email, "E-mail of the accomodation")
+                                            @Html.TextBoxFor(m => m.Email, null, new { @class = "form-control", placeholder = "example@webprovider.com" })
+                                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Phone, "Phone-number")
+                                            @Html.TextBoxFor(m => m.Phone, null, new { @class = "form-control", placeholder = "phone number" })
+                                            @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Description, "Descripton about accomodation")
+                                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "10", required = "" })
+                                            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <b>Name of the city:</b>@Html.DropDownList("ListaGradova", (IEnumerable<SelectListItem>)ViewBag.gradove, new { @class = "form-control" })
+                                        </div>
+                                        <div class="form-group">
+                                            <b>Type of the accomodation:</b>@Html.DropDownList("ListaTipovaSmestaja", (IEnumerable<SelectListItem>)ViewBag.tipsmestaja, new { @class = "form-control" })
+
+
+
+
+
+
+
+
+
+
+                                        </div>
+                                        <input type="submit" class="btn btn-default" value="Add accomodation" />
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">Accomodation details:</div>
+            <div class="panel-body">
+                @using (Html.BeginForm("AccomodationDetails", "Account", FormMethod.Post, new { @class = "form" }))
+                {
+                    <div class="form-group">
+                        @Html.DropDownList("listaSmestaja", (IEnumerable<SelectListItem>)ViewBag.smestaji, new { @class = "form-control" })
+
+                    </div>
+
+                    <input type="submit" class="btn btn-default" value="Show Accomodation" />
+
+
+                }
+            </div>
+        </div>
+
+    </div>
+}
+<script src="~/Scripts/SearchAccJs.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

@@ -1,0 +1,122 @@
+﻿@model BTA.Models.CityInfoByCategoryViewModel
+@using BTA.Models
+@{
+    ViewBag.Title = "PrikaziInfoOGradu";
+}
+
+
+@if (TempData["provera"] != null)
+{
+    <h4 style="margin-bottom:20px;">@Model.CityName information about @Model.CityCategoryName: @Model.Info</h4>
+    <p>Date:@Model.Date.ToShortDateString()</p>
+    <p>Author:@Model.UserName</p>
+    <hr />
+    <p>User comments</p>
+
+    foreach (CityInfoByCategoryViewModel komenatari in Admin.CityCommentPoSifri(Model.CityID, Model.CityCategoryID))
+    {
+        <div class="comment-div">
+            <p>@komenatari.Comment</p>
+            <small>@komenatari.UserName</small>
+            <br />
+            <small>@komenatari.Date.ToLongDateString()</small>
+            @if (int.Parse(Session["rola"].ToString()) == 1)
+            {
+                using (Html.BeginForm("DeleteComment", "Account", FormMethod.Post))
+                {
+                    @Html.HiddenFor(m => komenatari.CommentID);
+                    @Html.HiddenFor(m => komenatari.Comment);
+                    @Html.HiddenFor(m => komenatari.UserID);
+                    @Html.HiddenFor(m => komenatari.CityID);
+                    @Html.HiddenFor(m => komenatari.Date);
+                    @Html.HiddenFor(m => komenatari.CategoryID);
+                    @Html.HiddenFor(m => Model.CityName)
+                    @Html.HiddenFor(m => Model.CityCategoryName)
+                    @Html.HiddenFor(m => Model.Info)
+                    @Html.HiddenFor(m => Model.UserName)
+                    @Html.HiddenFor(m => Model.Date)
+                    @Html.HiddenFor(m => Model.CityCategoryID)
+                    @Html.HiddenFor(m => Model.UserID)
+                    @Html.HiddenFor(m => Model.CityID)
+
+                    <input type="submit" value="Delete comment" style="margin-top:10px;" class="btn btn-default confirm-btn" />
+                }
+            }
+        </div>
+
+
+    }
+
+
+}
+
+
+@if (TempData["nema"] != null)
+{
+    <h4>There is no information about this category for this city.</h4>
+    <p>User comments</p>
+
+    foreach (CityInfoByCategoryViewModel komenatari in Admin.CityCommentPoSifri(Model.CityID, Model.CityCategoryID))
+    {
+        <div class="comment-div">
+            <p>@komenatari.Comment</p>
+            <small>@komenatari.UserName</small>
+            <br />
+            <small>@komenatari.Date.ToLongDateString()</small>
+            @if (int.Parse(Session["rola"].ToString()) == 1)
+            {
+                using (Html.BeginForm("DeleteComment", "Account", FormMethod.Post))
+                {
+                    @Html.HiddenFor(m => komenatari.CommentID);
+                    @Html.HiddenFor(m => komenatari.Comment);
+                    @Html.HiddenFor(m => komenatari.UserID);
+                    @Html.HiddenFor(m => komenatari.CityID);
+                    @Html.HiddenFor(m => komenatari.Date);
+                    @Html.HiddenFor(m => komenatari.CategoryID);
+                    @Html.HiddenFor(m => Model.CityName)
+                    @Html.HiddenFor(m => Model.CityCategoryName)
+                    @Html.HiddenFor(m => Model.Info)
+                    @Html.HiddenFor(m => Model.UserName)
+                    @Html.HiddenFor(m => Model.Date)
+                    @Html.HiddenFor(m => Model.CityCategoryID)
+                    @Html.HiddenFor(m => Model.UserID)
+                    @Html.HiddenFor(m => Model.CityID)
+
+                    <input type="submit" value="Delete comment" style="margin-top:10px; font-size:10px" class="btn btn-default confirm-btn"  />
+                }
+            }
+        </div>
+    }
+}
+@using (Html.BeginForm("DodajKomentar", "Account", FormMethod.Post, new { @class = "form" }))
+
+{
+    <div>
+        @Html.LabelFor(m => m.Comment, "Add comment about city-category")
+        <br />
+        @Html.TextAreaFor(m => m.Comment, new { @class = "form" })
+        @Html.ValidationMessageFor(m=>m.Comment)
+        @Html.HiddenFor(m => Model.CityCategoryID)
+        @Html.HiddenFor(m => Model.UserID)
+        @Html.HiddenFor(m => Model.CityID)
+        @Html.HiddenFor(m => Model.CityName)
+        @Html.HiddenFor(m => Model.CityCategoryName)
+        @Html.HiddenFor(m => Model.Info)
+        @Html.HiddenFor(m => Model.Date)
+        @Html.HiddenFor(m => Model.UserName)
+
+
+        <br/>
+        <br/>
+        <input type="submit" value="Add comment about this city-category" class="btn btn-default confirm-btn" style="font-size:10px"/>
+
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

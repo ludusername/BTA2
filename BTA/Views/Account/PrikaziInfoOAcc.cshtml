@@ -1,0 +1,123 @@
+﻿@model BTA.Models.AccommodationModel
+@using BTA.Models
+@{
+    ViewBag.Title = "PrikaziInfoOAcc";
+}
+
+
+
+
+@if (TempData["provera"] != null)
+{
+
+    <h4 style="margin-bottom:20px;">@Model.Name is @Model.Name1.ToLower() in the city @Model.CityName with avereage grade:@Model.prosek</h4>
+    <p>Adress:@Model.Address</p>
+    <p>Phone:@Model.Phone</p>
+    <p>E-Mail:@Model.Email</p>
+    <p>Info:@Model.Description</p>
+    <hr />
+    <p>User comments</p>
+
+
+
+
+
+    foreach (AccommodationModel komenatari in Admin.AccomodationFeedbackPoSifri(Model.AccommodationID))
+    {
+        <div class="comment-div">
+
+            <p>@komenatari.Comment</p>
+            <p>User rating:@komenatari.StarRating1</p>
+            <small>@komenatari.UserName</small>
+            <br />
+            <small>@komenatari.DateTimeOfFeedback</small>
+
+
+            @if (int.Parse(Session["rola"].ToString()) == 1)
+            {
+                using (Html.BeginForm("DeleteComment1", "Account", FormMethod.Post))
+                {
+                    @Html.HiddenFor(m => komenatari.AccFeedbackID);
+                    @Html.HiddenFor(m => komenatari.Comment);
+                    @Html.HiddenFor(m => komenatari.UserID);
+                    @Html.HiddenFor(m => komenatari.CityID);
+                    @Html.HiddenFor(m => komenatari.DateTimeOfFeedback);
+                    @Html.HiddenFor(m => Model.Name);
+                    @Html.HiddenFor(m => Model.CityName)
+
+
+                    @Html.HiddenFor(m => Model.UserName)
+
+
+                    @Html.HiddenFor(m => Model.UserID)
+                    @Html.HiddenFor(m => Model.CityID)
+                    @Html.HiddenFor(m => Model.Name1)
+                    @Html.HiddenFor(m => Model.prosek)
+                    @Html.HiddenFor(m => Model.AccommodationID)
+                    @Html.HiddenFor(m => Model.Address)
+                    @Html.HiddenFor(m => Model.Phone)
+                    @Html.HiddenFor(m => Model.Email)
+                    @Html.HiddenFor(m => Model.Description)
+
+
+                    <input type="submit" value="Delete comment" style="margin-top:10px" class="btn btn-default confirm-btn" />
+                }
+            }
+
+        </div>
+    }
+}
+
+
+
+
+@using (Html.BeginForm("DodajKomentar1", "Account", FormMethod.Post, new { @class = "form" }))
+
+{
+    <div>
+        @Html.LabelFor(m => m.Comment, "Put your comment about this accomodation")
+        <br />
+        @Html.TextAreaFor(m => m.Comment, new { @class = "form" })
+        @Html.ValidationMessageFor(m => m.Comment)
+        <br />
+        @Html.LabelFor(m => m.StarRating1, "Please rate this accommodation")
+        <br />
+        @Html.TextBoxFor(m => m.StarRating1, new { @class = "form" })
+        @Html.ValidationMessageFor(m => m.StarRating1)
+
+        @Html.HiddenFor(m => Model.AccommodationID)
+
+
+
+        @Html.HiddenFor(m => Model.Name)
+        @Html.HiddenFor(m => Model.Name1)
+
+        @Html.HiddenFor(m => Model.CityName)
+        @Html.HiddenFor(m => Model.UserName)
+
+
+        @Html.HiddenFor(m => Model.UserID)
+        @Html.HiddenFor(m => Model.CityID)
+        @Html.HiddenFor(m => Model.Name1)
+        @Html.HiddenFor(m => Model.prosek)
+
+        @Html.HiddenFor(m => Model.Address)
+        @Html.HiddenFor(m => Model.Phone)
+        @Html.HiddenFor(m => Model.Email)
+        @Html.HiddenFor(m => Model.Description)
+
+
+
+
+
+        <br />
+        <br />
+        <input type="submit" value="Add comment about this city-category" class="btn btn-default confirm-btn" style="font-size:10px" />
+
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

@@ -1,0 +1,105 @@
+﻿
+
+@model BTA.Models.TransportaitonProvider
+@{
+    ViewBag.Title = "Provider";
+}
+
+@if (TempData["Naziv"] != null)
+{
+    <div class="alert alert-success">New provider:@TempData["Naziv"] succsesfully added</div>
+}
+@if (TempData["Izmena"] != null)
+{
+    <div class="alert alert-success">Succsefully edited provider detail for provider:@TempData["Izmena"]</div>
+}
+
+<div class="container panel-container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Provider page </div>
+                <div class="panel-body">
+                    <div class="panel panel-primary">
+                        <div class="panel panel-heading">Add provider</div>
+                        <div class="panel-body">
+                            @using (Html.BeginForm("Providers", "Account", FormMethod.Post, new { @class = "form" }))
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TransportationProviderName, "Transportation provider name")
+                                    @Html.TextBoxFor(m => m.TransportationProviderName, null, new { @class = "form-control", placeholder = "Transportation-provider-name" })
+                                    @Html.ValidationMessageFor(m => m.TransportationProviderName, null, new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.StreetName, "Name of the street")
+                                    @Html.TextBoxFor(m => m.StreetName, null, new { @class = "form-control", placeholder = "street name" })
+                                    @Html.ValidationMessageFor(m => m.StreetName, null, new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.StreetNumber, "Number of the street")
+                                    @Html.TextBoxFor(m => m.StreetNumber, null, new { @class = "form-control", placeholder = "street number" })
+                                    @Html.ValidationMessageFor(m => m.StreetNumber, null, new { @class = "text-danger" })
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Phone, "Phone-number")
+                                    @Html.TextBoxFor(m => m.Phone, null, new { @class = "form-control", placeholder = "phone number" })
+                                    @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })
+                                </div>
+
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <b>Name of the city:</b>@Html.DropDownList("ListaGradova", (IEnumerable<SelectListItem>)ViewBag.gradove, new { @class = "form-control" })
+                                </div>
+                                
+                                <div class="form-group">
+                                    <b>Type of the transportatiton:</b>@Html.DropDownList("ListaTipovaPrevoza", (IEnumerable<SelectListItem>)ViewBag.tipprevoza, new { @class = "form-control" })
+                                </div>
+                                <input type="submit" class="btn btn-default" value="Add Provider" />
+
+                            }
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                   
+                    <div class="panel panel-primary">
+                        <div class="panel panel-heading">Provider details:</div>
+                        <div class="panel-body">
+                            @using (Html.BeginForm("ProvidersDetails", "Account", FormMethod.Post, new { @class = "form" }))
+                            {
+                                <div class="form-group">
+                                    @Html.DropDownList("listaProvajdera", (IEnumerable<SelectListItem>)ViewBag.provajderi, new { @class = "form-control" })
+
+                                </div>
+
+                                <input type="submit" class="btn btn-default"  value="Show Provider" />
+                              
+
+                            }
+                        </div>
+                    </div>
+                   
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+

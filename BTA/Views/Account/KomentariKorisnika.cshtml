@@ -1,0 +1,107 @@
+﻿@model BTA.Models.FeedbackUser
+@using BTA.Models
+@{
+    ViewBag.Title = "KomentariKorisnika";
+}
+
+
+
+<p>User feedbacks</p>
+@foreach (TransportaitonModel komentari in Admin.TransportationFeedbackPoUseru(Model.UserID))
+{
+<div class="comment-div">
+
+    <p>@komentari.Comment</p>
+    <small>@komentari.Date</small>
+    <br />
+    <p>User rating:@komentari.StarRating</p>
+    <small>@komentari.Date1</small>
+    <br />
+    <small>@komentari.UserName</small>
+    <br />
+    <small>cateegory:transportaiton</small>
+    @using (Html.BeginForm("DeleteComment3", "Account", FormMethod.Post))
+    {
+    @Html.HiddenFor(m => komentari.FeedBackID)
+    @Html.HiddenFor(m => komentari.CommentID);
+    @Html.HiddenFor(m => komentari.RatingID)
+    @Html.HiddenFor(m => komentari.UserID);
+    @Html.HiddenFor(m => komentari.CityID);
+    @Html.HiddenFor(m => komentari.Date);
+    @Html.HiddenFor(m => komentari.Date1)
+
+    
+
+
+
+
+
+    @Html.HiddenFor(m => Model.UserID)
+   
+
+   
+
+  
+
+
+    <input type="submit" value="Delete Comment" style="margin-top:10px" class="btn btn-default confirm-btn" />
+    
+    }
+</div>
+}
+@foreach (AccommodationModel komenatari in Admin.AccomodationFeedbackPoSifriUsera(Model.UserID))
+{
+<div class="comment-div">
+
+    <p>@komenatari.Comment</p>
+    <p>User rating:@komenatari.StarRating1</p>
+    <small>@komenatari.DateTimeOfFeedback</small>
+    <br />
+    <small>@komenatari.UserName</small>
+    <br />
+    <small>category:accomodation</small>
+   @using (Html.BeginForm("DeleteComment4", "Account", FormMethod.Post))
+    {
+    @Html.HiddenFor(m => komenatari.AccFeedbackID);
+    
+    
+
+
+    @Html.HiddenFor(m => Model.UserName)
+
+
+    @Html.HiddenFor(m => Model.UserID)
+ 
+
+
+    <input type="submit" value="Delete comment" style="margin-top:10px" class="btn btn-default confirm-btn" />
+    }
+    
+
+
+</div>
+}
+@foreach (CityInfoByCategoryViewModel komenatari in Admin.CityCommentPoSifriUsera(Model.UserID))
+{
+<div class="comment-div">
+    <p>@komenatari.Comment</p>
+    <small>@komenatari.UserName</small>
+    <br />
+    <small>@komenatari.Date.ToLongDateString()</small>
+    <br />
+    <small>category:city comments</small>
+    @using (Html.BeginForm("DeleteComment5", "Account", FormMethod.Post))
+    {
+    @Html.HiddenFor(m => komenatari.CommentID);
+    
+    @Html.HiddenFor(m => komenatari.UserID);
+    
+    @Html.HiddenFor(m => Model.UserID)
+    
+
+    <input type="submit" value="Delete comment" style="margin-top:10px;" class="btn btn-default confirm-btn" />
+    }
+
+</div>
+
+}
